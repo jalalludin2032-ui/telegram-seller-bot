@@ -6,18 +6,18 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID"))
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Hello! Use /admin to access private panel.")
+    await update.message.reply_text("✅ Bot is live! Use /admin")
 
 async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id != ADMIN_ID:
         await update.message.reply_text("🚫 Access denied.")
         return
-    await update.message.reply_text("🔐 Admin panel active!")
+    await update.message.reply_text("🔐 Admin panel ready!")
 
 app = Application.builder().token(BOT_TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("admin", admin))
 
 if __name__ == "__main__":
-    print("🤖 Bot starting...")
+    print("🚀 Starting...")
     app.run_polling()
